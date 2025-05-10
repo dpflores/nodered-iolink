@@ -1,13 +1,5 @@
 [
     {
-        "id": "7088c3a69b202aa0",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "4b1b4aacfc414975",
         "type": "tab",
         "label": "IO-LINK",
@@ -187,12 +179,13 @@
             "7f226d4c25819e01",
             "c56add60c00b9105",
             "aef04260775add9c",
-            "b715af7cce48c58f"
+            "b715af7cce48c58f",
+            "c86fdbff7d449dca"
         ],
         "x": 174,
         "y": 419,
         "w": 172,
-        "h": 402
+        "h": 442
     },
     {
         "id": "5e1259dc7139fde8",
@@ -224,6 +217,7 @@
         "arraySpltType": "len",
         "stream": false,
         "addname": "",
+        "property": "payload",
         "x": 230,
         "y": 160,
         "wires": [
@@ -244,6 +238,7 @@
         "key": "topic",
         "joiner": "\\n",
         "joinerType": "str",
+        "useparts": true,
         "accumulate": false,
         "timeout": "",
         "count": "",
@@ -268,7 +263,7 @@
         "rules": [
             {
                 "t": "cont",
-                "v": "TW2000",
+                "v": "PV7003",
                 "vt": "str"
             },
             {
@@ -292,7 +287,7 @@
         "y": 160,
         "wires": [
             [
-                "464308600402051f"
+                "9895b1eb9ad2b59e"
             ],
             [
                 "835a9b043fd81878"
@@ -992,117 +987,6 @@
         ]
     },
     {
-        "id": "464308600402051f",
-        "type": "buffer-parser",
-        "z": "d8eff534107492f4",
-        "name": "TW2000",
-        "data": "payload.data",
-        "dataType": "msg",
-        "specification": "spec",
-        "specificationType": "ui",
-        "items": [
-            {
-                "type": "int16be",
-                "name": "temperature",
-                "offset": 0,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "0.1",
-                "mask": ""
-            },
-            {
-                "type": "byte",
-                "name": "scale",
-                "offset": 3,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "1",
-                "mask": "0xF0"
-            },
-            {
-                "type": "uint8",
-                "name": "status",
-                "offset": 3,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": ">>4",
-                "mask": "0xF0"
-            },
-            {
-                "type": "bool",
-                "name": "out1",
-                "offset": 3,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "1",
-                "mask": ""
-            }
-        ],
-        "swap1": "",
-        "swap2": "",
-        "swap3": "",
-        "swap1Type": "swap",
-        "swap2Type": "swap",
-        "swap3Type": "swap",
-        "msgProperty": "payload.data",
-        "msgPropertyType": "str",
-        "resultType": "keyvalue",
-        "resultTypeType": "return",
-        "multipleResult": false,
-        "fanOutMultipleResult": false,
-        "setTopic": true,
-        "outputs": 1,
-        "x": 580,
-        "y": 80,
-        "wires": [
-            [
-                "9a319f2f1d0da5e6"
-            ]
-        ]
-    },
-    {
-        "id": "835a9b043fd81878",
-        "type": "buffer-parser",
-        "z": "d8eff534107492f4",
-        "name": "TP",
-        "data": "payload.data",
-        "dataType": "msg",
-        "specification": "spec",
-        "specificationType": "ui",
-        "items": [
-            {
-                "type": "int16be",
-                "name": "temperature",
-                "offset": 0,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "0.1",
-                "mask": ""
-            }
-        ],
-        "swap1": "",
-        "swap2": "",
-        "swap3": "",
-        "swap1Type": "swap",
-        "swap2Type": "swap",
-        "swap3Type": "swap",
-        "msgProperty": "payload.data",
-        "msgPropertyType": "str",
-        "resultType": "keyvalue",
-        "resultTypeType": "return",
-        "multipleResult": false,
-        "fanOutMultipleResult": false,
-        "setTopic": true,
-        "outputs": 1,
-        "x": 570,
-        "y": 140,
-        "wires": [
-            [
-                "9a319f2f1d0da5e6"
-            ]
-        ]
-    },
-    {
         "id": "068e41dcad5a94f2",
         "type": "buffer-parser",
         "z": "d8eff534107492f4",
@@ -1349,6 +1233,177 @@
         ]
     },
     {
+        "id": "b715af7cce48c58f",
+        "type": "buffer-parser",
+        "z": "d8eff534107492f4",
+        "d": true,
+        "g": "19b6f50e55a455e1",
+        "name": "DP2200",
+        "data": "payload.data",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "int16be",
+                "name": "current",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.001",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "out1",
+                "offset": 2,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.001",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload.data",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 260,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c86fdbff7d449dca",
+        "type": "buffer-parser",
+        "z": "d8eff534107492f4",
+        "d": true,
+        "g": "19b6f50e55a455e1",
+        "name": "PV7003",
+        "data": "payload.data",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "int16be",
+                "name": "pressure",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "out1",
+                "offset": 3,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "out2",
+                "offset": 3,
+                "length": 1,
+                "offsetbit": 1,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload.data",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 260,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9895b1eb9ad2b59e",
+        "type": "buffer-parser",
+        "z": "d8eff534107492f4",
+        "name": "PV7003",
+        "data": "payload.data",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "int16be",
+                "name": "pressure",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.145038",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "out1",
+                "offset": 3,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "out2",
+                "offset": 3,
+                "length": 1,
+                "offsetbit": 1,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload.data",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 580,
+        "y": 80,
+        "wires": [
+            [
+                "9a319f2f1d0da5e6"
+            ]
+        ]
+    },
+    {
         "id": "f6034bee90468ee3",
         "type": "buffer-parser",
         "z": "d8eff534107492f4",
@@ -1400,12 +1455,10 @@
         ]
     },
     {
-        "id": "b715af7cce48c58f",
+        "id": "835a9b043fd81878",
         "type": "buffer-parser",
         "z": "d8eff534107492f4",
-        "d": true,
-        "g": "19b6f50e55a455e1",
-        "name": "DP2200",
+        "name": "TP",
         "data": "payload.data",
         "dataType": "msg",
         "specification": "spec",
@@ -1413,20 +1466,11 @@
         "items": [
             {
                 "type": "int16be",
-                "name": "current",
+                "name": "temperature",
                 "offset": 0,
                 "length": 1,
                 "offsetbit": 0,
-                "scale": "0.001",
-                "mask": ""
-            },
-            {
-                "type": "bool",
-                "name": "out1",
-                "offset": 2,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "0.001",
+                "scale": "0.1",
                 "mask": ""
             }
         ],
@@ -1444,11 +1488,33 @@
         "fanOutMultipleResult": false,
         "setTopic": true,
         "outputs": 1,
-        "x": 260,
-        "y": 780,
+        "x": 570,
+        "y": 140,
         "wires": [
-            []
+            [
+                "9a319f2f1d0da5e6"
+            ]
         ]
+    },
+    {
+        "id": "d7fba559cb94330a",
+        "type": "comment",
+        "z": "d8eff534107492f4",
+        "name": "si no es psi, para bar solo poner 0.01 en gradient",
+        "info": "",
+        "x": 640,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "531ce139781543cd",
+        "type": "comment",
+        "z": "d8eff534107492f4",
+        "name": "Convierte 4 - 20 mA a temperatura",
+        "info": "",
+        "x": 820,
+        "y": 240,
+        "wires": []
     },
     {
         "id": "695a37a5f877c95a",
@@ -1747,37 +1813,20 @@
                 "vt": "str"
             }
         ],
-        "repeat": "5",
+        "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 130,
+        "x": 120,
         "y": 420,
         "wires": [
             [
                 "9469d06d5b720922"
             ]
         ]
-    },
-    {
-        "id": "4345b1ff3cc9bff0",
-        "type": "debug",
-        "z": "4b1b4aacfc414975",
-        "name": "debug 168",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 930,
-        "y": 460,
-        "wires": []
     },
     {
         "id": "b5cc05babdd37854",
@@ -1875,7 +1924,7 @@
         "type": "debug",
         "z": "4b1b4aacfc414975",
         "name": "debug 170",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1883,7 +1932,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 510,
-        "y": 460,
+        "y": 480,
         "wires": []
     },
     {
@@ -1924,65 +1973,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 670,
-        "y": 480,
-        "wires": []
-    },
-    {
-        "id": "72acbb7a1e1657eb",
-        "type": "debug",
-        "z": "4b1b4aacfc414975",
-        "name": "debug 175",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1170,
+        "x": 710,
         "y": 420,
         "wires": []
-    },
-    {
-        "id": "e1fe541c25dd4efc",
-        "type": "function",
-        "z": "4b1b4aacfc414975",
-        "name": "convert to serial and data",
-        "func": "const input = msg.payload;\nvar serialsAndData = {};\nfor (const port in input) {\n  const portData = input[port];\n  const serial = portData.serial;\n  const data = portData.data;\n\n  if (serial && data && typeof data === 'object') {\n    serialsAndData[serial] = data;\n  }\n}\nmsg.payload = serialsAndData;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 750,
-        "y": 420,
-        "wires": [
-            [
-                "4345b1ff3cc9bff0",
-                "814d7d6677bb7091"
-            ]
-        ]
-    },
-    {
-        "id": "814d7d6677bb7091",
-        "type": "function",
-        "z": "4b1b4aacfc414975",
-        "name": "adding iolink to global",
-        "func": "\n// Asigna el mensaje general a una variable\nvar gatewayData = global.get('gateway_data');\n\n// Itera sobre todas las claves en msg.payload\nfor (var key in msg.payload) {\n    // Agrega cada par clave-valor al objeto data del mensaje general\n    gatewayData.data[key] = msg.payload[key];\n}\n\n// Elimina las claves que no están presentes en msg.payload del objeto data\nfor (var key in gatewayData.data) {\n    // Excluye las claves gps y gateway_info\n    if (key !== \"gps\" && key !== \"gateway_info\" && !(key in msg.payload)) {\n        delete gatewayData.data[key];\n    }\n}\n\n\n// Actualiza el mensaje general con los nuevos datos\nglobal.set('gateway_data', gatewayData);\n\n\nmsg.payload = gatewayData;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 960,
-        "y": 420,
-        "wires": [
-            [
-                "72acbb7a1e1657eb"
-            ]
-        ]
     }
 ]
